@@ -1,5 +1,5 @@
 {% set name = "opentelemetry-instrumentation-watsonx" %}
-{% set version = "0.49.6" %}
+{% set version = "0.57.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,26 +7,26 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
-  sha256: b7f7218e6aaac05c1c5a914ce5f39ec4b82a56d23f99090b6f847bbff62093ee
+  sha256: 57d29d4c4dc3d28fd301fc3458fffeded79c29d51089f550b7912d0b94bc6d2e
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  skip: true  # [py<39]
+  skip: true  # [py<310]
 
 requirements:
   host:
     - pip
     - python
-    - poetry-core
+    - hatchling
   run:
     - python
     - opentelemetry-api >=1.38.0,<2.0.0
     - opentelemetry-instrumentation >=0.59b0
     - opentelemetry-semantic-conventions >=0.59b0
-    - opentelemetry-semantic-conventions-ai >=0.4.13,<0.5
+    - opentelemetry-semantic-conventions-ai >=0.5.1,<0.6.0
   run_constrained:
-    - ibm-watson-machine-learning ==1.0.333
+    - ibm-watson-machine-learning ==1.0.368
 
 # Unable to run tests, ibm-watson-machine-learning is not in the main channel.
 test:
